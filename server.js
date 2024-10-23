@@ -57,3 +57,7 @@ mongoose
 .catch((err) => {
     console.log({msg: err});
 });
+
+app.get("/",(req, res) => {
+    res.json({ message: "Hello world from backend"})
+})
