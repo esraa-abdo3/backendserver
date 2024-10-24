@@ -50,7 +50,7 @@ const updateCourse = async (req, res) => {
       }
 
         // Check if the user is the instructor or an admin
-    if (course.instructor.toString() !== req.user.id && req.user.role !== 'admin') {
+    if (course.instructor.toString() !== req.user.id ) {
       return res.status(403).json({ message: 'Not authorized to update this course' });
     }
   
@@ -82,7 +82,7 @@ const deleteCourse = async (req, res) => {
         }
 
         // Check if the user is the instructor or an admin
-    if (course.instructor.toString() !== req.user.id && req.user.role !== 'admin') {
+    if (course.instructor.toString() !== req.user.id ) {
       return res.status(403).json({ message: 'Not authorized to delete this course' });
     }
 

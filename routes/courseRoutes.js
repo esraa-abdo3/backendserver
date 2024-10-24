@@ -8,7 +8,7 @@ const router = express.Router();
 
 
 router.post('/', protect, (req, res, next) => {
-  if (req.user.role === 'admin' || req.user.role === 'instructor') {
+  if ( req.user.role === 'instructor') {
     return next();
   } 
   return res.status(403).json({ message: 'Not authorized' });
@@ -45,7 +45,7 @@ router.put('/:id', protect, upload.single('video'), async (req, res, next) => {
   if (!course) return res.status(404).json({ message: 'Course not found' });
 
   
-  if (req.user.role === 'admin' || course.instructor.toString() === req.user.id) {
+  if (course.instructor.toString() === req.user.id) {
     return next(); 
   }
 
@@ -89,7 +89,7 @@ router.delete('/:id', protect, async (req, res) => {
     const course = await Course.findById(req.params.id);
     if (!course) return res.status(404).json({ message: 'Course not found' });
 
-    if (req.user.role === 'admin' || course.instructor.toString() === req.user.id) {
+    if (course.instructor.toString() === req.user.id) {
       await Course.findByIdAndDelete(req.params.id);
       return res.status(200).json({ message: 'Course removed' });
     }

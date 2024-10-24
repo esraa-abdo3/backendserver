@@ -126,14 +126,17 @@ const logout = (req, res) => {
 };
 
 
-const getAllUsers = async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+// const getAllUsers = async (req, res) => {
+//   try {
+//     if (req.user.role !== 'instructor') {
+//       return res.status(403).json({ message: 'Access forbidden: You do not have the required role' });
+//     }
+//     const users = await User.find({});
+//     res.status(200).json(users);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 
 // Update user details
@@ -198,4 +201,4 @@ const deleteUser = async (req,res) => {
 
 
 
-module.exports = { signup, login, refresh, logout, getAllUsers, updateUser, getUserProfile, deleteUser,blacklistedTokens};
+module.exports = { signup, login, refresh, logout, updateUser, getUserProfile, deleteUser,blacklistedTokens};
